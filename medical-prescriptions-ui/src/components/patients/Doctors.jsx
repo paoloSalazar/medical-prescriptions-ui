@@ -1,12 +1,12 @@
-import PatientDataService from '../../data/PatientsDataService.js';
+import DoctorsDataService from '../../data/DoctorsDataService.js';
 import React, { useEffect, useState } from 'react';
 
-const Patients = () => {
-    const [patients, setPatients] = useState([]);
+const Doctors = () => {
+    const [doctors, setDoctors] = useState([]);
     useEffect(() => {
-        PatientDataService.getAll()
+        DoctorsDataService.getAll()
             .then(response => {
-                setPatients(response.data);
+                setDoctors(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -22,16 +22,16 @@ const Patients = () => {
                         <tr>
                             <th>Name</th>
                             <th>Last Name</th>
-                            <th>Date of Birth</th>
+                            <th>Specialty</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            patients.map((patient, index) => (
+                            doctors.map((doctor, index) => (
                                 <tr key={index}>
-                                    <td>{patient.name}</td>
-                                    <td>{patient.lastname}</td>
-                                    <td>{patient.dateofbirth}</td>
+                                    <td>{doctor.name}</td>
+                                    <td>{doctor.lastname}</td>
+                                    <td>{doctor.specialty}</td>
                                 </tr>
                             ))
 
@@ -43,4 +43,4 @@ const Patients = () => {
     )
 };
 
-export default Patients;
+export default Doctors;
