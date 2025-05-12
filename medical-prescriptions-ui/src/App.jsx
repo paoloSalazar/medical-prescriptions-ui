@@ -1,27 +1,10 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-// import Patients from './components/patients/Patients.jsx'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <Patients></Patients>
-//     </>
-//   )
-// }
-
-// export default App
-
-// filepath: d:\PROJECTS\React\medical-prescriptions-ui\medical-prescriptions-ui\src\App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Navbar from './components/patients/Navbar';
 import Patients from './components/patients/Patients.jsx';
-import Doctors from './components/patients/Doctors.jsx';
+import AddPatients from './components/patients/AddPatient.jsx';
+import Doctors from './components/doctors/Doctors.jsx';
+import AddDoctor from './components/doctors/AddDoctor.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 // import './App.css';
 
@@ -35,8 +18,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/patients" element={<Patients />} />
+          <Route path="/patients/addPatient" element={<AddPatients />} />
+
           <Route path="/doctors" element={<Doctors />} />
+          <Route path="/doctors/addDoctor" element={<AddDoctor />} />
+
         </Routes>
     </Router>
   );
