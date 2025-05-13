@@ -14,6 +14,18 @@ const Patients = () => {
             });
         }, []);
 
+    const handleDelete = (id) => {
+        PatientDataService.delete(id)
+          .then(response => {
+            console.log('Patient deleted successfully:', response.data);
+            // Update the patients state to remove the deleted patient
+            setPatients(patients.filter(patient => patient.id !== id));
+          })
+          .catch(error => {
+            console.error('Error deleting patient:', error);
+          });
+    };
+
     return (
         <>  
             <div className="text-center my-4">
@@ -26,6 +38,7 @@ const Patients = () => {
                             <th>Name</th>
                             <th>Last Name</th>
                             <th>Date of Birth</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +48,14 @@ const Patients = () => {
                                     <td>{patient.name}</td>
                                     <td>{patient.lastname}</td>
                                     <td>{new Date(patient.dateofbirth).toDateString()}</td>
+                                    <td>
+                                         <Link to={`/patients/updatePatient/${patient.id}`} className="btn btn-warning">
+                                            Update
+                                        </Link>
+                                        <button className="btn btn-danger" onClick={() => handleDelete(patient.id)}>
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             ))
 
