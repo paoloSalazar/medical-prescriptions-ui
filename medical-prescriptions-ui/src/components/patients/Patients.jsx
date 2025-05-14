@@ -1,9 +1,12 @@
 import PatientDataService from '../../data/PatientsDataService.js';
+import PatientDetailModal from './PatientDetailModal.jsx';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Patients = () => {
     const [patients, setPatients] = useState([]);
+    const [selectedPatient, setSelectedPatient] = useState(null);
+
     useEffect(() => {
         PatientDataService.getAll()
             .then(response => {
@@ -26,6 +29,14 @@ const Patients = () => {
           });
     };
 
+    const handleRowClick = (patient) => {
+      setSelectedPatient(patient);
+    };
+
+    const handleCloseModal = () => {
+      setSelectedPatient(null);
+    };
+
     return (
         <>  
             <div className="text-center my-4">
@@ -44,7 +55,7 @@ const Patients = () => {
                     <tbody>
                         {
                             patients.map((patient, index) => (
-                                <tr key={index}>
+                                <tr key={index} onClick={() => handleRowClick(patient)} style={{ cursor: 'pointer' }}>
                                     <td>{patient.name}</td>
                                     <td>{patient.lastname}</td>
                                     <td>{new Date(patient.dateofbirth).toDateString()}</td>
@@ -68,6 +79,13 @@ const Patients = () => {
                     Add a New Patient
                     </Link>
             </div>
+
+            {selectedPatient && (
+                <PatientDetailModal
+                patient={selectedPatient}
+                onClose={handleCloseModal}
+                />
+            )}
         </>
     )
 };

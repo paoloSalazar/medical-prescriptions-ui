@@ -5,7 +5,10 @@ import Patients from './components/patients/Patients.jsx';
 import AddPatients from './components/patients/AddPatient.jsx';
 import Doctors from './components/doctors/Doctors.jsx';
 import AddDoctor from './components/doctors/AddDoctor.jsx';
-import UpdatePatient from './components/patients/updatePatient.jsx';
+import UpdatePatient from './components/patients/UpdatePatient.jsx';
+import UpdateDoctor from './components/doctors/UpdateDoctor.jsx';
+import MedicationTypes from './components/medicationTypes/MedicationTypes.jsx';
+import AddMedicationType from './components/medicationTypes/AddMedicationType.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 // import './App.css';
 
@@ -27,7 +30,11 @@ function App() {
 
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/doctors/addDoctor" element={<AddDoctor />} />
-
+          <Route path="/doctors/updateDoctor/:id" element={<UpdateDoctor />} />
+          
+          <Route path="/medicationTypes" element={<MedicationTypes />} />
+          <Route path="/medicationTypes/addMedicationType" element={<AddMedicationType />} />
+          
         </Routes>
     </Router>
   );

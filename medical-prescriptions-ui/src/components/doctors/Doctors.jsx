@@ -1,10 +1,13 @@
 import DoctorsDataService from '../../data/DoctorsDataService.js';
+import DoctorDetailModal from './DoctorDetailModal.jsx';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
 const Doctors = () => {
     const [doctors, setDoctors] = useState([]);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+
     useEffect(() => {
         DoctorsDataService.getAll()
             .then(response => {
@@ -14,6 +17,26 @@ const Doctors = () => {
                 console.log(e);
             });
         }, []);
+    
+    const handleRowClick = (doctor) => {
+      setSelectedDoctor(doctor);
+    };
+    
+    const handleCloseModal = () => {
+      setSelectedDoctor(null);
+    };
+    
+    const handleDelete = (id) => {
+        DoctorsDataService.delete(id)
+          .then(response => {
+            console.log('Doctor deleted successfully:', response.data);
+            // Update the patients state to remove the deleted patient
+            setDoctors(doctors.filter(doctor => doctor.id !== id));
+          })
+          .catch(error => {
+            console.error('Error deleting doctor:', error);
+          });
+    };
 
     return (
         <>  
@@ -27,15 +50,24 @@ const Doctors = () => {
                             <th>Name</th>
                             <th>Last Name</th>
                             <th>Specialty</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             doctors.map((doctor, index) => (
-                                <tr key={index}>
+                                <tr key={index} onClick={() => handleRowClick(doctor)} style={{ cursor: 'pointer' }}>
                                     <td>{doctor.name}</td>
                                     <td>{doctor.lastname}</td>
                                     <td>{doctor.specialty}</td>
+                                    <td>
+                                         <Link to={`/doctors/updateDoctor/${doctor.id}`} className="btn btn-warning">
+                                            Update
+                                        </Link>
+                                        <button className="btn btn-danger" onClick={() => handleDelete(doctor.id)}>
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             ))
 
@@ -48,6 +80,13 @@ const Doctors = () => {
                     Add a New Doctor
                 </Link>
             </div>
+
+            {selectedDoctor && (
+                <DoctorDetailModal
+                     doctor={selectedDoctor}
+                     onClose={handleCloseModal}
+                />
+            )}
         </>
     )
 };
