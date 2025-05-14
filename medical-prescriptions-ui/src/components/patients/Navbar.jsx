@@ -23,6 +23,9 @@ function Navbar() {
               <li className="nav-item">
                 <Link className="nav-link" to="/medicationTypes">Medication Types</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/medications">Medications</Link>
+              </li>
               {/* Add more navigation items as needed */}
             </ul>
           </div>

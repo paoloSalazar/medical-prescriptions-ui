@@ -9,6 +9,9 @@ import UpdatePatient from './components/patients/UpdatePatient.jsx';
 import UpdateDoctor from './components/doctors/UpdateDoctor.jsx';
 import MedicationTypes from './components/medicationTypes/MedicationTypes.jsx';
 import AddMedicationType from './components/medicationTypes/AddMedicationType.jsx';
+import Medications from './components/medications/Medications.jsx';
+import AddMedication from './components/medications/AddMedication.jsx';
+import UpdateMedication from './components/medications/UpdateMedication.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 // import './App.css';
 
@@ -34,6 +37,10 @@ function App() {
           
           <Route path="/medicationTypes" element={<MedicationTypes />} />
           <Route path="/medicationTypes/addMedicationType" element={<AddMedicationType />} />
+          
+          <Route path="/medications" element={<Medications />} />
+          <Route path="/medications/addMedication" element={<AddMedication />} />
+          <Route path="/medications/updateMedication/:id" element={<UpdateMedication />} />
           
         </Routes>
     </Router>
