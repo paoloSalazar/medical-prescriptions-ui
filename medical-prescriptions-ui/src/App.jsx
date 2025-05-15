@@ -12,6 +12,9 @@ import AddMedicationType from './components/medicationTypes/AddMedicationType.js
 import Medications from './components/medications/Medications.jsx';
 import AddMedication from './components/medications/AddMedication.jsx';
 import UpdateMedication from './components/medications/UpdateMedication.jsx';
+import Appointments from './components/appointments/Appointments.jsx';
+import AddAppointment from './components/appointments/AddAppointment.jsx';
+import UpdateAppointment from './components/appointments/UpdateAppointment.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 // import './App.css';
 
@@ -41,6 +44,11 @@ function App() {
           <Route path="/medications" element={<Medications />} />
           <Route path="/medications/addMedication" element={<AddMedication />} />
           <Route path="/medications/updateMedication/:id" element={<UpdateMedication />} />
+
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/appointments/addAppointment" element={<AddAppointment />} />
+          <Route path="/appointments/updateAppointment/:id" element={<UpdateAppointment />} />
+
           
         </Routes>
     </Router>
