@@ -62,10 +62,10 @@ const Doctors = () => {
                                     <td>{doctor.specialty}</td>
                                     <td>
                                          <Link to={`/doctors/updateDoctor/${doctor.id}`} className="btn btn-warning">
-                                            Update
+                                            <i className="bi bi-pencil-square" title='Update Doctor'></i>
                                         </Link>
                                         <button className="btn btn-danger" onClick={() => handleDelete(doctor.id)}>
-                                            Delete
+                                            <i className="bi bi-trash" title='Delete Doctor'></i> 
                                         </button>
                                     </td>
                                 </tr>

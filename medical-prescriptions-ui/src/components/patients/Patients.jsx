@@ -61,10 +61,10 @@ const Patients = () => {
                                     <td>{new Date(patient.dateofbirth).toDateString()}</td>
                                     <td>
                                          <Link to={`/patients/updatePatient/${patient.id}`} className="btn btn-warning">
-                                            Update
+                                            <i className="bi bi-pencil-square" title='Update Patient'></i> 
                                         </Link>
                                         <button className="btn btn-danger" onClick={() => handleDelete(patient.id)}>
-                                            Delete
+                                            <i className="bi bi-trash" title='Delete Patient'></i> 
                                         </button>
                                     </td>
                                 </tr>

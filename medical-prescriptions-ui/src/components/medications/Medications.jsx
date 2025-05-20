@@ -59,10 +59,10 @@ const Medications = () => {
                           </td>
                         <td>
                             <Link to={`/medications/updateMedication/${medication.id}`} className="btn btn-warning">
-                                Update
+                              <i className="bi bi-pencil-square" title='Update Medication'></i>
                             </Link>
                             <button className="btn btn-danger" onClick={() => handleDelete(medication.id)}>
-                                Delete
+                                <i className="bi bi-trash" title='Delete Medication'></i>
                             </button>
                           </td>
                         </tr>

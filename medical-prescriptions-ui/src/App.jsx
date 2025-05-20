@@ -17,6 +17,8 @@ import AddAppointment from './components/appointments/AddAppointment.jsx';
 import UpdateAppointment from './components/appointments/UpdateAppointment.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 // import './App.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import AppointmentDetail from './components/appointments/AppointmentDetail.jsx';
 
 function Home() {
   return <h2>Home</h2>;
@@ -48,7 +50,8 @@ function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/appointments/addAppointment" element={<AddAppointment />} />
           <Route path="/appointments/updateAppointment/:id" element={<UpdateAppointment />} />
-
+          <Route path="/appointments/detail/:id" element={<AppointmentDetail />} />
+          
           
         </Routes>
     </Router>

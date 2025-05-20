@@ -66,10 +66,10 @@ return (
                             </td>
                         <td>
                                 <Link to={`/medicationTypes/updateMedicationType/${medicationType.id}`} className="btn btn-warning">
-                                    Update
+                                    <i className="bi bi-pencil-square" title='Update Medication Type'></i>
                                 </Link>
                                 <button className="btn btn-danger" onClick={() => handleDelete(medicationType.id)}>
-                                    Delete
+                                     <i className="bi bi-trash" title='Delete Medication Type'></i> 
                                 </button>
                             </td>
                         </tr>
