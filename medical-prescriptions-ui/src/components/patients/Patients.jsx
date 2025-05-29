@@ -55,7 +55,7 @@ const Patients = () => {
                     <tbody>
                         {
                             patients.map((patient, index) => (
-                                <tr key={index} onClick={() => handleRowClick(patient)} style={{ cursor: 'pointer' }}>
+                                <tr key={index}>
                                     <td>{patient.name}</td>
                                     <td>{patient.lastname}</td>
                                     <td>{new Date(patient.dateofbirth).toDateString()}</td>
@@ -65,6 +65,9 @@ const Patients = () => {
                                         </Link>
                                         <button className="btn btn-danger" onClick={() => handleDelete(patient.id)}>
                                             <i className="bi bi-trash" title='Delete Patient'></i> 
+                                        </button>
+                                        <button className="btn btn-info" onClick={() => handleRowClick(patient)}>
+                                            <i className="bi bi-eye" title='View Patient Details'></i>
                                         </button>
                                     </td>
                                 </tr>

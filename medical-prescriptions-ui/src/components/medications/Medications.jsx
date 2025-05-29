@@ -46,7 +46,7 @@ const Medications = () => {
                   </thead>
                   <tbody>
                     {medications.map((medication, index) => (
-                        <tr key={index} onClick={() => handleRowClick(medication)} style={{ cursor: 'pointer' }}>
+                        <tr key={index} >
                           <td>{medication.code}</td>
                           <td>{medication.name}</td>
                           <td>{new Date(medication.expirationdate).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</td>
@@ -63,6 +63,9 @@ const Medications = () => {
                             </Link>
                             <button className="btn btn-danger" onClick={() => handleDelete(medication.id)}>
                                 <i className="bi bi-trash" title='Delete Medication'></i>
+                            </button>
+                            <button className="btn btn-info" onClick={() => handleRowClick(medication)}>
+                                <i className="bi bi-eye" title='View Medication Details'></i>
                             </button>
                           </td>
                         </tr>

@@ -54,7 +54,7 @@ return (
                 </thead>
                 <tbody>
                     {medicationTypes.map((medicationType, index) => (
-                        <tr key={index} onClick={() => handleRowClick(medicationType)} style={{ cursor: 'pointer' }}>
+                        <tr key={index} >
                             <td>{medicationType.code}</td>
                             <td>{medicationType.name}</td>
                             <td>
@@ -70,6 +70,9 @@ return (
                                 </Link>
                                 <button className="btn btn-danger" onClick={() => handleDelete(medicationType.id)}>
                                      <i className="bi bi-trash" title='Delete Medication Type'></i> 
+                                </button>
+                                <button className="btn btn-info" onClick={() => handleRowClick(medicationType)}>
+                                    <i className="bi bi-eye" title='View Medication Type Details'></i>
                                 </button>
                             </td>
                         </tr>
