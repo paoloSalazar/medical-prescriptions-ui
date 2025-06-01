@@ -1,0 +1,17 @@
+node_modules
+.git
+.gitignore
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage
+build
+dist
+.DS_Store
+medical-prescriptions-ui/dist
+medical-prescriptions-ui/node_modules
