@@ -1,7 +1,10 @@
 import React from 'react';
 import '../assets/ModalDescription.css'; // Create this file for styling
+import { useTranslation } from 'react-i18next';
 
 const MedicationTypeDetailModal = ({ medicationType, onClose }) => {
+  const { t } = useTranslation();
+
   if (!medicationType) {
     return null;
   }
@@ -10,15 +13,15 @@ const MedicationTypeDetailModal = ({ medicationType, onClose }) => {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>Medication Type Details</h2>
+          <h2>{t('Details', { entity: t('entities.medicationType') })}</h2>
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
         </div>
         <div className="modal-body">
-          <p><strong>Code:</strong> {medicationType.code}</p>
-          <p><strong>Name:</strong> {medicationType.name}</p>
-          <p><strong>Description:</strong> {medicationType.description}</p>
+          <p><strong>{t('Code')}:</strong> {medicationType.code}</p>
+          <p><strong>{t('Name')}:</strong> {medicationType.name}</p>
+          <p><strong>{t('Description')}:</strong> {medicationType.description}</p>
           {/* Add more details as needed */}
         </div>
       </div>

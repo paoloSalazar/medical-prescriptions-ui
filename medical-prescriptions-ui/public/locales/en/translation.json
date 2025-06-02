@@ -1,0 +1,27 @@
+{
+  "Add Title": "Add a New {{entity}}",
+  "Add": "Add {{entity}}",
+  "List": "List of {{entity}}s",
+  "Update": "Update {{entity}}",
+  "Delete": "Delete {{entity}}",
+  "View Details": "View {{entity}} Details",
+  "Details": "Details of {{entity}}",
+  "Added Success": "{{entity}} added successfully!",
+  "Name": "Name",
+  "Last Name": "Last Name",
+  "Date of Birth": "Date of Birth",
+  "Add Patient": "Add Patient",
+  "Please provide a name.": "Please provide a name.",
+  "Please enter only letters for the name.": "Please enter only letters for the name.",
+  "Please provide a last name.": "Please provide a last name.",
+  "Please enter only letters for the last name.": "Please enter only letters for the last name.",
+  "Please provide a valid date of birth.": "Please provide a valid date of birth.",
+  "Patients List": "Patients List",
+  "entities": {
+    "patient": "Patient",
+    "doctor": "Doctor",
+    "medication": "Medication",
+    "appointment": "Appointment",
+    "medicationType": "Medication Type"
+  }
+}

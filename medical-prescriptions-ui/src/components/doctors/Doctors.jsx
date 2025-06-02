@@ -2,11 +2,13 @@ import DoctorsDataService from '../../data/DoctorsDataService.js';
 import DoctorDetailModal from './DoctorDetailModal.jsx';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 const Doctors = () => {
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         DoctorsDataService.getAll()
@@ -41,16 +43,16 @@ const Doctors = () => {
     return (
         <>  
             <div className="text-center my-4">
-                <h2>Doctors List</h2>
+                <h2>{t('Doctors List')}</h2>
             </div>
             <div className='col-md-12'>
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Last Name</th>
-                            <th>Specialty</th>
-                            <th>Actions</th>
+                            <th>{t('Name')}</th>
+                            <th>{t('Last Name')}</th>
+                            <th>{t('Specialty')}</th>
+                            <th>{t('Actions')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,13 +64,13 @@ const Doctors = () => {
                                     <td>{doctor.specialty}</td>
                                     <td>
                                          <Link to={`/doctors/updateDoctor/${doctor.id}`} className="btn btn-warning">
-                                            <i className="bi bi-pencil-square" title='Update Doctor'></i>
+                                            <i className="bi bi-pencil-square" title={t('Update', { entity: t('entities.doctor') })}></i>
                                         </Link>
                                         <button className="btn btn-danger" onClick={() => handleDelete(doctor.id)}>
-                                            <i className="bi bi-trash" title='Delete Doctor'></i> 
+                                            <i className="bi bi-trash" title={t('Delete', { entity: t('entities.doctor') })}></i> 
                                         </button>
                                         <button className="btn btn-info" onClick={() => handleRowClick(doctor)}>
-                                            <i className="bi bi-eye" title='View Doctor Details'></i>
+                                            <i className="bi bi-eye" title={t('View Details', { entity: t('entities.doctor') })}></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -79,8 +81,8 @@ const Doctors = () => {
                 </table>
             </div>
             <div className="mt-3 d-flex justify-content-center">
-                <Link to="/doctors/addDoctor" title="Add a new doctor" className="btn btn-primary">
-                    Add a New Doctor
+                <Link to="/doctors/addDoctor" title={t('Add a New Doctor')} className="btn btn-primary">
+                    {t('Add a New Doctor')}
                 </Link>
             </div>
 

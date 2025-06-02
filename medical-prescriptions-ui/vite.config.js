@@ -4,7 +4,12 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3002,
-    host: '0.0.0.0', // Add this line to allow external access
+    port: 3000,
+    // host: '0.0.0.0', // Add this line to allow external access
+  },
+  optimizeDeps: {
+    include: [
+      'moment/locale/es',
+    ],
   }
 })

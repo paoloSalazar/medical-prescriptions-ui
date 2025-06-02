@@ -2,8 +2,10 @@ import MedicationTypesDataService from '../../data/MedicationTypesDataService.js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MedicationTypeDetailModal from './MedicationTypeDetailModal';
+import { useTranslation } from 'react-i18next';
 
 const MedicationTypes = () => {
+  const { t } = useTranslation();
   const [medicationTypes, setMedicationTypes] = useState([]);
   const [selectedMedicationType, setSelectedMedicationType] = useState(null);
   const MAX_DESCRIPTION_LENGTH = 50;
@@ -40,16 +42,16 @@ const MedicationTypes = () => {
 return (
     <>
         <div className="text-center my-4">
-            <h2>Medication Types List</h2>
+            <h2>{t('List', { entity: t('entities.medicationType') })}</h2>
         </div>
         <div className='col-md-12'>
             <table className="table table-hover">
                 <thead>
                     <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Actions</th>
+                        <th>{t('Code')}</th>
+                        <th>{t('Name')}</th>
+                        <th>{t('Description')}</th>
+                        <th>{t('Actions')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +84,7 @@ return (
         </div>
         <div className="mt-3 d-flex justify-content-center">
             <Link to="/medicationTypes/addMedicationType" title="Add a new medication type" className="btn btn-primary">
-                Add a New Medication Type
+                {t('Add Title', { entity: t('entities.medicationType') })}
             </Link>
         </div>
 

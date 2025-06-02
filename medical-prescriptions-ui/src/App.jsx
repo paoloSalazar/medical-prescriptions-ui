@@ -19,6 +19,10 @@ import UpdateAppointment from './components/appointments/UpdateAppointment.jsx';
 // import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AppointmentDetail from './components/appointments/AppointmentDetail.jsx';
+import './components/i18n/i18n.js'; // Import i18n configuration
+import LanguageSwitcher from './components/i18n/LanguageSwitcher.jsx';import UpdateMedicationType from './components/medicationTypes/UpdateMedicationType.jsx';
+'../components/i18n/LanguageSwitcher.jsx'; // Import LanguageSwitcher styles
+
 
 function Home() {
   return <h2>Home</h2>;
@@ -27,6 +31,8 @@ function Home() {
 function App() {
   return (
     <Router>
+      
+        <LanguageSwitcher />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -42,7 +48,8 @@ function App() {
           
           <Route path="/medicationTypes" element={<MedicationTypes />} />
           <Route path="/medicationTypes/addMedicationType" element={<AddMedicationType />} />
-          
+          <Route path="/medicationTypes/updateMedicationType/:id" element={<UpdateMedicationType />} />
+
           <Route path="/medications" element={<Medications />} />
           <Route path="/medications/addMedication" element={<AddMedication />} />
           <Route path="/medications/updateMedication/:id" element={<UpdateMedication />} />
