@@ -4,6 +4,7 @@ import AppointmentsDataService from '../../data/AppointmentsDataService';
 import MedicationsDataService from '../../data/MedicationsDataService';
 import PrescriptionsDataService from '../../data/PrescriptionsDataService'; // Import PrescriptionsDataService
 import Select from 'react-select';
+import { useTranslation } from 'react-i18next';
 // import '../assets/ModalDescription.css';
 
 const AppointmentDetail = () => {
@@ -13,6 +14,33 @@ const AppointmentDetail = () => {
   const [selectedMedication, setSelectedMedication] = useState(null); // State for selected medication
   const [instructions, setInstructions] = useState(''); // State for instructions
   const [prescriptions, setPrescriptions] = useState([]); // State for prescriptions
+
+  const [errors, setErrors] = useState({
+    medication: '',
+    instructions: ''
+  });
+  const [validated, setValidated] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const { t, i18n } = useTranslation();
+
+  const validateField = (name, value) => {
+    switch(name) {
+      case 'medication':
+        if (!value) {
+          return t('Please select a medication.');
+        }
+        return '';
+      
+      case 'instructions':
+        if (!value || !value.trim()) {
+          return t('Please provide instructions for the medication.');
+        }
+        return '';
+
+      default:
+        return '';
+    }
+  };
 
   useEffect(() => {
     // Fetch the appointment data when the component mounts
@@ -54,10 +82,18 @@ const AppointmentDetail = () => {
 
   const handleMedicationChange = (selectedOption) => {
     setSelectedMedication(selectedOption);
+    setErrors({
+      ...errors,
+      medication: ''
+    });
   };
 
   const handleInstructionsChange = (event) => {
     setInstructions(event.target.value);
+    setErrors({
+      ...errors,
+      instructions: ''
+    });
   };
 
   const handleDelete = (id) => {
@@ -75,6 +111,20 @@ const AppointmentDetail = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Validate all fields
+    const newErrors = {
+      medication: validateField('medication', selectedMedication),
+      instructions: validateField('instructions', instructions)
+    };
+
+    setErrors(newErrors);
+    setValidated(true);
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error !== '')) {
+      return;
+    }
+
     const prescriptionData = {
       appointmentid: id,
       medicationid: selectedMedication.value,
@@ -84,10 +134,15 @@ const AppointmentDetail = () => {
     PrescriptionsDataService.create(prescriptionData)
       .then(response => {
         console.log('Prescription created successfully:', response.data);
-        alert('Prescription created successfully!');
+        setSuccessMessage(t('Added Success', { entity: t('entities.prescription') }));
         // Clear the form
         setSelectedMedication(null);
         setInstructions('');
+        setValidated(false);
+        setErrors({
+          medication: '',
+          instructions: ''
+        });
         // Refresh prescriptions list
         PrescriptionsDataService.getByAppointmentId(id)
           .then(response => {
@@ -96,10 +151,13 @@ const AppointmentDetail = () => {
           .catch(error => {
             console.error('Error fetching prescriptions:', error);
           });
+        
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 3000);
       })
       .catch(error => {
         console.error('Error creating prescription:', error);
-        alert('Error creating prescription. Please try again.');
       });
   };
 
@@ -107,43 +165,65 @@ const AppointmentDetail = () => {
     <div className="container d-flex justify-content-center"> {/* Center the content */}
       <div className="card col-md-8"> {/* Use a Bootstrap card for styling */}
         <div className="card-body">
-          <h2 className="card-title text-center">Appointment Details</h2> {/* Center the title */}
-          <p className="card-text"><strong>Doctor:</strong> {appointment.doctorname}</p>
-          <p className="card-text"><strong>Patient:</strong> {appointment.patientname}</p>
+          <h2 className="card-title text-center">{t('Details', {entity: t('entities.appointment')})}</h2> {/* Center the title */}
+          <p className="card-text"><strong>{t('Doctor')}:</strong> {appointment.doctorname}</p>
+          <p className="card-text"><strong>{t('Patient')}:</strong> {appointment.patientname}</p>
           <p className="card-text">
-            <strong>Appointment Date:</strong> {new Date(appointment.appointmentdate).toDateString()} {new Date(appointment.appointmentdate).toLocaleTimeString()}
+            <strong>{t('Appointment Date')}:</strong> {new Date(appointment.appointmentdate).toLocaleDateString(i18n.language || 'en', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  weekday: 'long',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
           </p>
-          <p className="card-text"><strong>Reason:</strong> {appointment.reason}</p>
+          <p className="card-text"><strong>{t('Reason')}:</strong> {appointment.reason}</p>
           {/* Add more appointment details here */}
 
-          <div className="row justify-content-center"> {/* Center the form horizontally */}
-            <div className="col-md-8"> {/* Limit the form width */}
-              <h5 className="text-center mb-3">Add Medication and Instructions</h5> {/* Center the form title */}
-              <form onSubmit={handleSubmit}> {/* Handle form submission */}
-                <div className="mb-3">
-                  <label htmlFor="medicationName" className="form-label">Medication</label>
-                  <Select
-                    options={medications}
-                    value={selectedMedication}
-                    onChange={handleMedicationChange}
-                    placeholder="Type to search medications..."
-                  />
+          <div className="row justify-content-center">
+          <div className="col-md-8">
+            <h5 className="text-center mb-3">{t('Add Medication and Instructions')}</h5>
+            {successMessage && (
+              <div className="alert alert-success fade show" role="alert">
+                {successMessage}
+              </div>
+            )}
+            <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+              <div className="mb-3">
+                <label htmlFor="medicationName" className="form-label">{t('Medication')}</label>
+                <Select
+                  options={medications}
+                  value={selectedMedication}
+                  onChange={handleMedicationChange}
+                  placeholder={t('Type to search medications...')}
+                  className={validated && errors.medication ? 'is-invalid' : ''}
+                  classNamePrefix="react-select"
+                />
+                <div className="invalid-feedback" style={{ display: validated && errors.medication ? 'block' : 'none' }}>
+                  {errors.medication}
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="instructions" className="form-label">Instructions</label>
-                  <textarea
-                    className="form-control"
-                    id="instructions"
-                    rows="3"
-                    placeholder="Enter instructions"
-                    value={instructions}
-                    onChange={handleInstructionsChange}
-                  />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="instructions" className="form-label">{t('Instructions')}</label>
+                <textarea
+                  className={`form-control ${validated && errors.instructions ? 'is-invalid' : ''}`}
+                  id="instructions"
+                  rows="3"
+                  placeholder={t('Enter instructions')}
+                  value={instructions}
+                  onChange={handleInstructionsChange}
+                />
+                <div className="invalid-feedback">
+                  {errors.instructions}
                 </div>
-                <button type="submit" className="btn btn-primary">Add Medication and instructions</button>
-              </form>
-            </div>
+              </div>
+              <button type="submit" className="btn btn-primary">
+                {t('Add Medication and Instructions')}
+              </button>
+            </form>
           </div>
+        </div>
 
           <div className="row justify-content-center mt-4"> {/* Center the table horizontally */}
             <div className="col-md-12"> {/* Limit the table width */}
@@ -151,10 +231,9 @@ const AppointmentDetail = () => {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Medication</th>
-                    <th>Instructions</th>
-                    <th>Actions</th>
-                    
+                    <th>{t('Medication')}</th>
+                    <th>{t('Instructions')}</th>
+                    <th>{t('Actions')}</th>
                   </tr>
                 </thead>
                 <tbody>

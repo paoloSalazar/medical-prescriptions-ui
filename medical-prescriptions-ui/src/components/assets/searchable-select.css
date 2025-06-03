@@ -1,0 +1,9 @@
+.is-invalid .react-select__control {
+    border-color: #dc3545;
+}
+
+.is-invalid .react-select__control:hover,
+.is-invalid .react-select__control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 1px #dc3545;
+}

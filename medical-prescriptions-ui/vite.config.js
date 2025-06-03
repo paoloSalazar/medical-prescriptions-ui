@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    // host: '0.0.0.0', // Add this line to allow external access
+    host: '0.0.0.0', // Add this line to allow external access
   },
   optimizeDeps: {
     include: [

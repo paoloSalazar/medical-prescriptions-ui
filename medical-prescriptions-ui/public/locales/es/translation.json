@@ -1,5 +1,5 @@
 {
-  "Add Title": "Registrar un nuevo {{entity}}",
+  "Add Title": "Registrar nuevo/a {{entity}}",
   "Add": "Registrar {{entity}}",
   "List": "Lista de {{entity}}s",
   "Update": "Actualizar {{entity}}",
@@ -39,11 +39,29 @@
   "Please enter only letters.": "Ingresa solo letras.",
   "Doctor added successfully!": "¡Médico creado exitosamente!",
   "Please enter only letters and numbers.": "Ingresa solo letras y números.",
+  "Expiration Date": "Fecha de Vencimiento",
+  "Please select a medication type.": "Selecciona un tipo de medicamento.",
+  "No description available": "No hay descripción disponible",
+  "Patient": "Paciente",
+  "Doctor": "Médico",
+  "Medication": "Medicamento",
+  "Appointment": "Cita",
+  "Medication Type": "Tipo de Medicamento",
+  "Reason": "Motivo",
+  "Appointment Date": "Fecha de la Cita",
+  "Select Patient": "Seleccionar Paciente",
+  "Select Doctor": "Seleccionar Médico",
+  "Select appointment date": "Seleccionar fecha de la cita",
+  "Add Medication and Instructions": "Agregar Medicamento e Instrucciones",
+  "Instructions": "Instrucciones",
+  "Enter instructions": "Ingresa instrucciones",
+  "Type to search medications...": "Escribe para buscar medicamentos...",
   "entities": {
     "patient": "Paciente",
     "doctor": "Médico",
     "medication": "Medicamento",
     "appointment": "Cita",
-    "medicationType": "Tipo de Medicamento"
+    "medicationType": "Tipo de Medicamento",
+    "prescription": "Receta"
   }
 }
